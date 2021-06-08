@@ -3,8 +3,9 @@
 var learnjs = {};
 
 learnjs.problemView = function(problemNumber) {
-  var title = 'Problem #' + problemNumber + ' Comming soon!';
-  return $('<div class="problem-view">').text(title);
+  var view = $('.templates .problem-view').clone();
+  view.find('.title').text('Problem #' + problemNumber + ' Comming soon!');
+  return view;
 };
 
 learnjs.showView = function(hash) {
