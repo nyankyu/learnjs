@@ -57,7 +57,18 @@ describe('answer section', function() {
   it('can check a correct answer by hitting a button', function() {
     view.find('.answer').val('true');
     view.find('.check-btn').click();
-    expect(view.find('.result').text()).toEqual('Correct!');
+    expect(view.find('.result span').text()).toEqual('Correct!');
+  });
+
+  it('shows the link to next problem when corrected', function() {
+    view.find('.answer').val('true');
+    view.find('.check-btn').click();
+    expect(view.find('a').attr('href')).toEqual('#problem-2');
+  });
+
+  it('shows the link to top page when last problem corrected', function() {
+    var correctFlash = learnjs.buildCorrectFlash(2);
+    expect(correctFlash.find('a').attr('href')).toEqual('');
   });
 
   it('rejects an incorrect answer', function() {
