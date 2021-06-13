@@ -15,7 +15,7 @@ learnjs.problems = [
 
 learnjs.applyObject = function(obj, elem) {
   for (var key in obj) {
-    elem.find('[data-name="' + key + '"]').text(obj[key]);
+    elem.find(`[data-name="${key}"]`).text(obj[key]);
   }
 };
 
@@ -27,7 +27,7 @@ learnjs.buildCorrectFlash = function(problemNumber) {
   var correctFlash = learnjs.template('correct-flash');
   var link = correctFlash.find('a');
   if (problemNumber < learnjs.problems.length) {
-    link.attr('href', '#problem-' + (problemNumber + 1));
+    link.attr('href', `#problem-${problemNumber + 1}`);
   } else {
     link.attr('href', '');
     link.text("You're Finished!");
@@ -47,7 +47,7 @@ learnjs.problemView = function(data) {
 
   function checkAnswer() {
     var answer = view.find('.answer').val();
-    var test = problemData.code.replace('__', answer) + '; problem();';
+    var test = `${problemData.code.replace('__', answer)}; problem();`;
     return eval(test);
   };
 
@@ -62,11 +62,11 @@ learnjs.problemView = function(data) {
   };
 
   view.find('.check-btn').click(checkAnswerClick);
-  view.find('.title').text('Problem #' + problemNumber);
+  view.find('.title').text(`Problem #${problemNumber}`);
   learnjs.applyObject(problemData, view);
   if (problemNumber < learnjs.problems.length) {
     var skipBtn = learnjs.template('skip-btn');
-    skipBtn.find('a').attr('href', '#problem-' + (problemNumber + 1));
+    skipBtn.find('a').attr('href', `#problem-${problemNumber + 1}`);
     $('.nav-list').append(skipBtn);
     view.bind('removingView', function() {
       skipBtn.remove();
@@ -104,5 +104,5 @@ learnjs.flashElement = function(elem, content) {
 };
 
 learnjs.template = function(name) {
-  return $('.templates .' + name).clone();
+  return $(`.templates .${name}`).clone();
 }
